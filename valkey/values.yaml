@@ -209,6 +209,16 @@ env: {}
   # Example:
   # LOG_LEVEL: info
 
+# List of Valkey modules to load on startup
+# A container with the modules preinstalled must be used
+# @see https://github.com/valkey-io/valkey-bundle
+#
+modules: []
+#  - /usr/lib/valkey/libjson.so
+#  - /usr/lib/valkey/libsearch.so
+#  - /usr/lib/valkey/libvalkey_bloom.so
+#  - /usr/lib/valkey/libvalkey_ldap.so
+
 metrics:
   # Enable Prometheus exporter sidecar
   enabled: false

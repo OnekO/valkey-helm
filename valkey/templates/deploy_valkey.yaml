@@ -85,7 +85,12 @@ spec:
         - name: {{ include "valkey.fullname" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           command: [ "valkey-server" ]
-          args: [ "/data/conf/valkey.conf" ]
+          args:
+            - "/data/conf/valkey.conf"
+            {{- range .Values.modules }}
+            - "--loadmodule"
+            - "{{ . }}"
+            {{- end }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           env:

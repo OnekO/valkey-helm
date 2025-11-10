@@ -207,15 +207,15 @@ spec:
             defaultMode: {{ .defaultMode | default 0440 }}
         {{- end }}
         {{- if and .Values.auth.enabled (or .Values.auth.generateDefaultUser.enabled .Values.auth.existingSecret) }}
-      - name: valkey-auth
-        secret:
-            {{- if .Values.auth.generateDefaultUser.enabled }}
-          secretName: {{ include "valkey.fullname" . }}-auth
-            {{- else }}
-          secretName: {{ .Values.auth.existingSecret }}
-            {{- end }}
-          defaultMode: 0440
-        {{- end }}
+        - name: valkey-auth
+          secret:
+              {{- if .Values.auth.generateDefaultUser.enabled }}
+            secretName: {{ include "valkey.fullname" . }}-auth
+              {{- else }}
+            secretName: {{ .Values.auth.existingSecret }}
+              {{- end }}
+            defaultMode: 0440
+          {{- end }}
         - name: {{ $storage.volumeName }}
         {{- if $storage.persistentVolumeClaimName }}
           persistentVolumeClaim:
